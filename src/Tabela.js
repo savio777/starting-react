@@ -14,30 +14,32 @@ const TabelaHead = () => {
     )
 }
 
-const TabelaCorpo = () => {
-    return (
-        <tbody>
-            <tr>
-                <td>Sávio</td>
-                <td>21</td>
-                <td>1.745</td>
+// tabela recebendo o props como argumento para povoar tabela
+const TabelaCorpo = (props) => {
+    // similar ao foreach para percorrer os dados e imprimir no retorno
+    const linhas = props.characterData.map((linha, index) => {
+        return (
+            <tr key={index}>
+                <td>{linha.nome}</td>
+                <td>{linha.idade}</td>
+                <td>{linha.altura}</td>
             </tr>
-            <tr>
-                <td>Thamara</td>
-                <td>19</td>
-                <td>1.69</td>
-            </tr>
-        </tbody>
-    )
+        )
+    })
+
+    // retornar todos os elementos
+    return <tbody>{linhas}</tbody>
 }
 
 class Tabela extends Component {
-
     render() {
+        // prop é usado para compartilhar dados ou codigo entre os componentes do react
+        const { characterData } = this.props
+
         return (
             <table>
                 <TabelaHead />
-                <TabelaCorpo />
+                <TabelaCorpo characterData={characterData} />
             </table>
         )
     }
