@@ -3,13 +3,12 @@ import Tabela from './Tabela';
 
 // jsx
 const iae = 'Iae'
-const h1 = <h1 className="site-heading">{iae} React</h1>
+const h1 = <h1 className="card-panel teal lighten-1">{iae} React</h1>
 
 class App extends Component {
-    render() {
-
-        // array em formato JSON para povoar tabela
-        const dados = [
+    // agora será possível modificar os dados
+    estado = {
+        dados: [
             {
                 nome: 'Sávio',
                 idade: 21,
@@ -19,14 +18,33 @@ class App extends Component {
                 nome: 'Thamara',
                 idade: 19,
                 altura: 1.69
-            }
-        ]
+            },
+        ],
+    }
+
+    // função para receber o index da linha e gerar novo array sem o index apagado
+    removerDado = (index) => {
+        const { dados } = this.estado
+
+        this.setState({
+            dados: dados.filter((dado, i) => {
+                return i !== index
+            }),
+        })
+    }
+
+    render() {
+        const { dados } = this.estado
 
         // inserindo os dados na tabela
         return (
             <div className="container">
-                <p>{h1}</p>
-                <Tabela characterData={dados} />
+                {h1}
+                <br /><br /><br />
+                <Tabela
+                    characterData={dados}
+                    removeCharacter={this.removerDado}
+                />
             </div>
         )
     }

@@ -9,6 +9,7 @@ const TabelaHead = () => {
                 <th>Nomes</th>
                 <th>Idade</th>
                 <th>Altura</th>
+                <th>Deletar</th>
             </tr>
         </thead>
     )
@@ -23,6 +24,11 @@ const TabelaCorpo = (props) => {
                 <td>{linha.nome}</td>
                 <td>{linha.idade}</td>
                 <td>{linha.altura}</td>
+                <td>
+                    <button className="waves-effect waves-light btn" onClick={() => props.removeCharacter(index)}>
+                        <i className="small material-icons">delete</i>
+                    </button>
+                </td>
             </tr>
         )
     })
@@ -34,12 +40,12 @@ const TabelaCorpo = (props) => {
 class Tabela extends Component {
     render() {
         // prop é usado para compartilhar dados ou codigo entre os componentes do react
-        const { characterData } = this.props
+        const { characterData, removeCharacter } = this.props
 
         return (
-            <table>
+            <table className="centered">
                 <TabelaHead />
-                <TabelaCorpo characterData={characterData} />
+                <TabelaCorpo characterData={characterData} removeCharacter={removeCharacter} />
             </table>
         )
     }
