@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Tabela from './Tabela';
+import Tabela from './Tabela'
+import Form from './Form'
 
 // jsx
 const iae = 'Iae'
@@ -9,17 +10,11 @@ class App extends Component {
     // agora será possível modificar os dados
     state = {
         dados: [
-            {
-                nome: 'Sávio',
-                idade: 21,
-                altura: 1.75
-            },
-            {
-                nome: 'Thamara',
-                idade: 19,
-                altura: 1.69
-            },
         ],
+    }
+
+    adicionarDado = (dado) => {
+        this.setState({dados: [...this.state.dados, dado]})
     }
 
     // função para receber o index da linha e gerar novo array sem o index apagado
@@ -40,7 +35,10 @@ class App extends Component {
         return (
             <div className="container">
                 {h1}
-                <br /><br /><br />
+                <br /><br />
+
+                {<Form handleSubmit={this.adicionarDado} />}
+                
                 <Tabela
                     characterData={dados}
                     removeCharacter={this.removerDado}
