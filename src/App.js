@@ -7,7 +7,7 @@ const h1 = <h1 className="card-panel teal lighten-1">{iae} React</h1>
 
 class App extends Component {
     // agora será possível modificar os dados
-    estado = {
+    state = {
         dados: [
             {
                 nome: 'Sávio',
@@ -24,7 +24,7 @@ class App extends Component {
 
     // função para receber o index da linha e gerar novo array sem o index apagado
     removerDado = (index) => {
-        const { dados } = this.estado
+        const { dados } = this.state
 
         this.setState({
             dados: dados.filter((dado, i) => {
@@ -34,7 +34,7 @@ class App extends Component {
     }
 
     render() {
-        const { dados } = this.estado
+        const { dados } = this.state
 
         // inserindo os dados na tabela
         return (
