@@ -7,14 +7,14 @@ const iae = 'Iae'
 const h1 = <h1 className="card-panel teal lighten-1">{iae} React</h1>
 
 class App extends Component {
-    // agora será possível modificar os dados
+
+    // lista vazia para ser manipulada com os dados para a tabela
     state = {
-        dados: [
-        ],
+        dados: [],
     }
 
     adicionarDado = (dado) => {
-        this.setState({dados: [...this.state.dados, dado]})
+        this.setState({ dados: [...this.state.dados, dado] })
     }
 
     // função para receber o index da linha e gerar novo array sem o index apagado
@@ -37,8 +37,7 @@ class App extends Component {
                 {h1}
                 <br /><br />
 
-                {<Form handleSubmit={this.adicionarDado} />}
-                
+                <Form handleSubmit={this.adicionarDado} />
                 <Tabela
                     characterData={dados}
                     removeCharacter={this.removerDado}

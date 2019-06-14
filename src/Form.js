@@ -15,16 +15,19 @@ class Form extends Component {
     }
 
     // função para guardar os inputs no state
-    adicionar = (event) => {
-        const { chave, valor } = event.target
+    // deve ser usado o nome da função original
+    handleChange = (event) => {
+        const { name, value } = event.target
 
         this.setState({
-            [chave]: valor,
+            [name]: value,
         })
     }
 
-    enviarForm = () => {
-        this.props.adicionar(this.state)
+    enviarForm = (event) => {
+        event.preventDefault()
+
+        this.props.handleSubmit(this.state)
         this.setState(this.initialState)
     }
 
@@ -33,28 +36,30 @@ class Form extends Component {
 
         return (
             <div className="row">
-                <form className="col s10">
+                <form className="col s10" onSubmit={this.enviarForm}>
                     <div className="row">
                         <div className="input-field col s10">
-                            <input type="text" id="nome" name="nome" value={nome} onChange={this.adicionar} />
-                            <label for="nome" className="active">Nome</label>
+                            <input type="text" id="nome" name="nome" value={nome} onChange={this.handleChange} />
+                            <label htmlFor="nome" className="active">Nome</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s5">
-                            <input type="number" id="idade" name="idade" value={idade} onChange={this.adicionar} />
-                            <label for="idade" className="active">Idade</label>
+                            <input type="number" id="idade" name="idade" value={idade} onChange={this.handleChange} />
+                            <label htmlFor="idade" className="active">Idade</label>
                         </div>
                         <div className="input-field col s5">
-                            <input type="number" step="0.1" id="altura" name="altura" value={altura} onChange={this.adicionar} />
-                            <label for="altura" className="active">Altura</label>
+                            <input type="number" step="0.1" id="altura" name="altura" value={altura} onChange={this.handleChange} />
+                            <label htmlFor="altura" className="active">Altura</label>
                         </div>
-                        <button className="btn-floating btn-large waves-effect waves-light" onClick={this.enviarForm}>
+                        <button type="submit" className="btn-floating btn-large waves-effect waves-light" onClick={this.enviarForm}>
                             <i className="medium material-icons">add</i>
                         </button>
                     </div>
                 </form>
             </div>
+
+       
         )
     }
 }
